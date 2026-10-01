@@ -1,6 +1,6 @@
 # Grayling
 
-Grayling turns HTML into plain text. It goes through the given file and deletes tags like header tags (h1-h6), <p>, and "<br>".
+Grayling turns HTML into plain text. It goes through the given file and deletes tags like header tags (h1-h6), `<p>`, and `<br>`.
 
 Grayling doesn't filter out any more tags right now because when writing normal text in html, you are unlikely to use any other tags. In fact, I based my tag list entirely off of one of my own HTML files.
 
