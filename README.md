@@ -14,4 +14,9 @@ First, get Grayling on your machine. Then, in the same directory as Grayling, ru
 node grayling.js <old_file> <new_file>
 ```
 
+Grayling is the opposite of [Yorklyn](https://github.com/Centurion774477/Yorklyn), which turns plain text files into HTML.
+
+Grayling is designed for when you wrote something down in an HTML file but you want to share that information with somebody, 
+whereas Yorklyn is for writing blog posts in plain text and generating HTML to add to your blog.
+
 Cheers!
