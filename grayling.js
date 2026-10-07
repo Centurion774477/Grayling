@@ -1,17 +1,20 @@
 
-const filesystem = require('fs');
+var filesystem = require('fs');
 
-let data = null;
+if (process.argv.length < 4) {
+    console.log("Please provide a file to read and a file to write.");
+    return;
+}
 
-const fileToRead = process.argv[2];
-const fileToCreate = process.argv[3];
+var fileToRead = process.argv[2];
+var fileToCreate = process.argv[3];
 
-console.log(fileToRead, fileToCreate)
-
-if (filesystem.existsSync(fileToRead) === false) {
+if (filesystem.existsSync(fileToRead) == false) {
     console.log(`Failed to locate ${fileToRead} in this context.`);
     return;
 }
+
+var data = null;
 
 try {
     data = filesystem.readFileSync(fileToRead, 'utf8');
@@ -20,20 +23,16 @@ try {
 }
 
 if (data == null) {
-    console.log(`No data was found in ${fileToRead}`);
+    console.log(`${fileToRead} is empty.`);
     return
 }
 
-let newLines = [];
+var newLines = [];
 
-lines = data.split('\n');
+var lines = data.split('\n').filter(line => line != "");
 
-for (let line of lines) {
-    if (line === "") {
-        continue;
-    }
-
-    const changed_line = line
+lines.forEach(line => {
+    newLines.push(line
         .replaceAll("<p>", "")
         .replaceAll("</p>", "")
         .replaceAll("<h1>", "")
@@ -48,17 +47,11 @@ for (let line of lines) {
         .replaceAll("</h4>", "")
         .replaceAll("</h5>", "")
         .replaceAll("</h6>", "")
-        .replaceAll("<br>", "\n");
-
-    newLines.push(
-        changed_line.trim()
-    );
-}
-
-newLines = newLines.join("\n");
+        .replaceAll("<br>", "\n").trim());
+});
 
 filesystem.writeFileSync(
-    fileToCreate, newLines
+    fileToCreate, newLines.join("\n")
 );
 
 console.log(`Great! Your new file can be found at ${fileToCreate}`);
